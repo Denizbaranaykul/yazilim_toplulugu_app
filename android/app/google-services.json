@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "645295703411",
+    "project_id": "yazilim-toplulugu-app",
+    "storage_bucket": "yazilim-toplulugu-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645295703411:android:9b7b0ee11c9c3822caf106",
+        "android_client_info": {
+          "package_name": "com.deniz_baran_aykul.yazilim_toplulugu_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPU7OPt8MpWJ4Jpx0mOJAe8Zjq8HfzvuI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
