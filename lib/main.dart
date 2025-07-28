@@ -4,7 +4,7 @@ import 'package:yazilim_toplulugu_app/pages/main_page/main_page_body.dart';
 import 'package:yazilim_toplulugu_app/pages/events_page/events_page.dart';
 import 'package:yazilim_toplulugu_app/pages/main_page/main_page.dart';
 import 'package:yazilim_toplulugu_app/pages/profile_page/profile_page.dart';
-import 'package:yazilim_toplulugu_app/pages/videos_page.dart';
+import 'package:yazilim_toplulugu_app/pages/videos_page/videos_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:yazilim_toplulugu_app/service/Auth_gate.dart';
 import 'service/firebase_options.dart';
