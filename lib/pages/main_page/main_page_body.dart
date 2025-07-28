@@ -72,3 +72,10 @@ class TrianglePainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
+
+AppBar app_bar_main() {
+  return AppBar(
+    title: Center(child: Text('yazılım topluluğu')),
+    backgroundColor: Color.fromARGB(255, 0, 176, 245),
+  );
+}

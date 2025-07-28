@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:yazilim_toplulugu_app/main_page/bottom_navigationbar.dart';
-import 'package:yazilim_toplulugu_app/pages/events_page.dart';
-import 'package:yazilim_toplulugu_app/pages/main_page.dart';
-import 'package:yazilim_toplulugu_app/pages/profile_page.dart';
+import 'package:yazilim_toplulugu_app/pages/main_page/bottom_navigationbar.dart';
+import 'package:yazilim_toplulugu_app/pages/main_page/main_page_body.dart';
+import 'package:yazilim_toplulugu_app/pages/events_page/events_page.dart';
+import 'package:yazilim_toplulugu_app/pages/main_page/main_page.dart';
+import 'package:yazilim_toplulugu_app/pages/profile_page/profile_page.dart';
 import 'package:yazilim_toplulugu_app/pages/videos_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:yazilim_toplulugu_app/service/Auth_gate.dart';
-import 'firebase_options.dart';
+import 'service/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +47,7 @@ class _Main_pageState extends State<Main_page> {
     });
   }
 
+  // sayfalar listesi
   final List<Widget> _pages = [
     Main_Page(),
     video_page(),
@@ -56,12 +58,14 @@ class _Main_pageState extends State<Main_page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: () {
-        if (currentIndex == 0) return app_bar_main();
+        if (currentIndex == 0) {
+          return app_bar_main(); //ana sayfa currentIndexte 0 0 sa appbarı maini çağrıyor değilse diğerlerinin appbarları zaten kendi pagelerinde
+        }
         return null;
       }(),
-
+      //pages listesinden indexe göre gosterme yapıyoruz
       body: _pages[currentIndex],
-
+      //alt barda ki iconlar ile sayfa geçişini sağlıyoruz
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: [
@@ -77,13 +81,6 @@ class _Main_pageState extends State<Main_page> {
           });
         },
       ),
-    );
-  }
-
-  AppBar app_bar_main() {
-    return AppBar(
-      title: Center(child: Text('yazılım topluluğu')),
-      backgroundColor: Color.fromARGB(255, 0, 176, 245),
     );
   }
 }

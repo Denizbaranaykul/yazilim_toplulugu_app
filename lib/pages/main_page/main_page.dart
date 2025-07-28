@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yazilim_toplulugu_app/main_page/main_page_body.dart';
+import 'package:yazilim_toplulugu_app/pages/main_page/main_page_body.dart';
 
 class Main_Page extends StatelessWidget {
   const Main_Page({super.key});
