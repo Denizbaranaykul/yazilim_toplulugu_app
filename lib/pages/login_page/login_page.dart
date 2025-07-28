@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:yazilim_toplulugu_app/pages/register_page.dart';
+import 'package:yazilim_toplulugu_app/pages/login_page/appbar_login_page.dart';
+import 'package:yazilim_toplulugu_app/pages/login_page/login_page_TextField.dart';
+import 'package:yazilim_toplulugu_app/pages/register_page/register_page.dart';
 import 'package:yazilim_toplulugu_app/service/auth.dart';
 
 class Login_page extends StatefulWidget {
@@ -38,10 +40,7 @@ class _Login_pageState extends State<Login_page> {
   final TextEditingController passwordController = TextEditingController();
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text('giriş ekranı')),
-        backgroundColor: Color.fromARGB(197, 1, 178, 237),
-      ),
+      appBar: appbar_login_page(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -49,9 +48,9 @@ class _Login_pageState extends State<Login_page> {
             const SizedBox(height: 16),
             profile_avatar_login(),
             const SizedBox(height: 24),
-            email_box(),
+            email_box(emailController),
             const SizedBox(height: 16),
-            password_box(),
+            password_box(passwordController),
             const SizedBox(height: 16),
             sign_in_button(context),
             const SizedBox(height: 16),
@@ -90,7 +89,6 @@ class _Login_pageState extends State<Login_page> {
               backgroundColor: Colors.green,
             ),
           );
-          // 🔥 Yönlendirme yok! AuthGate bunu yapacak zaten
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -102,34 +100,6 @@ class _Login_pageState extends State<Login_page> {
         }
       },
       child: Text('giriş yap'),
-    );
-  }
-
-  TextField password_box() {
-    return TextField(
-      controller: passwordController,
-      decoration: InputDecoration(
-        labelText: 'şifre',
-        border: OutlineInputBorder(),
-      ),
-    );
-  }
-
-  TextField email_box() {
-    return TextField(
-      controller: emailController,
-      decoration: InputDecoration(
-        labelText: 'e-mail',
-        border: OutlineInputBorder(),
-      ),
-    );
-  }
-
-  CircleAvatar profile_avatar_login() {
-    return CircleAvatar(
-      radius: 60,
-      backgroundColor: Colors.blueAccent,
-      child: Icon(Icons.person, size: 60, color: Colors.white),
     );
   }
 }

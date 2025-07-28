@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:yazilim_toplulugu_app/pages/register_page/appbar_register.dart';
+import 'package:yazilim_toplulugu_app/pages/register_page/register_page_TextFiled.dart';
 import 'package:yazilim_toplulugu_app/service/auth.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -44,9 +46,9 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Column(
         children: [
           const SizedBox(height: 16),
-          emailbox(),
+          emailbox(emailController),
           const SizedBox(height: 16),
-          password_box(),
+          password_box(passwordController),
           const SizedBox(height: 16),
           register_button(context),
         ],
@@ -54,13 +56,6 @@ class _RegisterPageState extends State<RegisterPage> {
       bottomNavigationBar: BottomAppBar(
         color: Color.fromARGB(255, 153, 255, 0),
       ),
-    );
-  }
-
-  AppBar appbar_register() {
-    return AppBar(
-      title: Center(child: Text('kayıt ol ekranı')),
-      backgroundColor: Color.fromARGB(222, 157, 255, 0),
     );
   }
 
@@ -89,26 +84,6 @@ class _RegisterPageState extends State<RegisterPage> {
       },
 
       child: Text('kayıt ol'),
-    );
-  }
-
-  TextField password_box() {
-    return TextField(
-      controller: passwordController,
-      decoration: InputDecoration(
-        labelText: 'şifre',
-        border: OutlineInputBorder(),
-      ),
-    );
-  }
-
-  TextField emailbox() {
-    return TextField(
-      controller: emailController,
-      decoration: InputDecoration(
-        labelText: 'e-mail',
-        border: OutlineInputBorder(),
-      ),
     );
   }
 }
