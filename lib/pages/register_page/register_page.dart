@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yazilim_toplulugu_app/pages/register_page/appbar_register.dart';
 import 'package:yazilim_toplulugu_app/pages/register_page/register_page_TextFiled.dart';
 import 'package:yazilim_toplulugu_app/service/auth.dart';
+import 'package:yazilim_toplulugu_app/service/local_notification.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -50,9 +51,14 @@ class _RegisterPageState extends State<RegisterPage> {
           const SizedBox(height: 16),
           password_box(passwordController),
           const SizedBox(height: 16),
-          register_button(context),
+          Builder(
+            builder: (context) {
+              return register_button(context);
+            },
+          ),
         ],
       ),
+
       bottomNavigationBar: BottomAppBar(
         color: Color.fromARGB(255, 153, 255, 0),
       ),
@@ -65,13 +71,7 @@ class _RegisterPageState extends State<RegisterPage> {
         bool result = await create_user();
 
         if (result) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text("Başarı ile kayıt olundu"),
-              duration: Duration(seconds: 2),
-              backgroundColor: const Color.fromARGB(255, 143, 231, 0),
-            ),
-          );
+          showSuccessNotification();
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

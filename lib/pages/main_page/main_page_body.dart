@@ -47,7 +47,7 @@ Row main_page_katilim_button() {
   return Row(
     children: [
       ElevatedButton(onPressed: () {}, child: Text('katılıcağım')),
-      const SizedBox(height: 16),
+      const SizedBox(height: 36),
       ElevatedButton(onPressed: () {}, child: Text('katılmayacağım')),
     ],
   );
