@@ -33,11 +33,6 @@ ElevatedButton sign_out_button(BuildContext context) {
     ),
     onPressed: () async {
       await FirebaseAuth.instance.signOut();
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => Login_page()),
-        (route) => false,
-      );
     },
     child: Text("Çıkış yap"),
   );
