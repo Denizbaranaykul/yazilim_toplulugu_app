@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:yazilim_toplulugu_app/variable/globals.dart' as globals;
 
 Row profile_buttons(BuildContext context) {
   return Row(
@@ -33,7 +32,6 @@ ElevatedButton sign_out_button(BuildContext context) {
     ),
     onPressed: () async {
       await FirebaseAuth.instance.signOut();
-      globals.login = false;
     },
     child: Text("Çıkış yap"),
   );

@@ -1,4 +1,6 @@
 // lib/globals.dart
 library myapp.globals;
 
-bool login = false;
+bool isLogin = true;
+
+bool first = false;

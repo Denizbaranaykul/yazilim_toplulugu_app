@@ -19,11 +19,6 @@ void main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  await NotificationHelper.showNotification(
-    title: "Test",
-    body: "Bu sadece bir test bildirimi",
-  );
-
   runApp(const MyApp());
 }
 
