@@ -4,6 +4,7 @@ import 'package:yazilim_toplulugu_app/pages/login_page/appbar_login_page.dart';
 import 'package:yazilim_toplulugu_app/pages/login_page/login_page_TextField.dart';
 import 'package:yazilim_toplulugu_app/pages/register_page/register_page.dart';
 import 'package:yazilim_toplulugu_app/service/auth.dart';
+import 'package:yazilim_toplulugu_app/variable/globals.dart' as globals;
 
 class Login_page extends StatefulWidget {
   const Login_page({super.key});
@@ -80,7 +81,6 @@ class _Login_pageState extends State<Login_page> {
     return ElevatedButton(
       onPressed: () async {
         bool result = await signIn();
-
         if (result) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -89,6 +89,7 @@ class _Login_pageState extends State<Login_page> {
               backgroundColor: Colors.green,
             ),
           );
+          globals.login = true;
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

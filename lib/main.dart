@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:yazilim_toplulugu_app/pages/main_page/bottom_navigationbar.dart';
 import 'package:yazilim_toplulugu_app/pages/main_page/main_page_body.dart';
 import 'package:yazilim_toplulugu_app/pages/events_page/events_page.dart';
@@ -7,11 +8,22 @@ import 'package:yazilim_toplulugu_app/pages/profile_page/profile_page.dart';
 import 'package:yazilim_toplulugu_app/pages/videos_page/videos_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:yazilim_toplulugu_app/service/Auth_gate.dart';
+import 'package:yazilim_toplulugu_app/service/notification_question.dart';
 import 'service/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await NotificationHelper.initialize();
+
+  await Permission.notification.request();
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  await NotificationHelper.showNotification(
+    title: "Test",
+    body: "Bu sadece bir test bildirimi",
+  );
+
   runApp(const MyApp());
 }
 
@@ -30,6 +42,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

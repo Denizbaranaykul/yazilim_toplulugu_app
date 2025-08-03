@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:yazilim_toplulugu_app/pages/login_page/login_page.dart';
 import 'package:yazilim_toplulugu_app/pages/register_page/appbar_register.dart';
 import 'package:yazilim_toplulugu_app/pages/register_page/register_page_TextFiled.dart';
 import 'package:yazilim_toplulugu_app/service/auth.dart';
-import 'package:yazilim_toplulugu_app/service/local_notification.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -20,6 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
         email: emailController.text,
         password: passwordController.text,
       );
+      await FirebaseAuth.instance.signOut();
       return true;
     } on FirebaseAuthException catch (e) {
       //sadece auth hatalarını yakalar
@@ -70,9 +71,16 @@ class _RegisterPageState extends State<RegisterPage> {
       onPressed: () async {
         bool result = await create_user();
 
-        if (result) {
-          showSuccessNotification();
-        } else {
+        if (result == true) {
+          await FirebaseAuth.instance.signOut();
+
+          // Login ekranına yönlendir:
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => Login_page()),
+            (Route<dynamic> route) => false,
+          );
+        } else if (result == false) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text("Hata: $erorMessage"),
@@ -80,9 +88,16 @@ class _RegisterPageState extends State<RegisterPage> {
               backgroundColor: Colors.red,
             ),
           );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("hiç biri çalışmadı :D"),
+              duration: Duration(seconds: 2),
+              backgroundColor: const Color.fromARGB(255, 244, 54, 162),
+            ),
+          );
         }
       },
-
       child: Text('kayıt ol'),
     );
   }

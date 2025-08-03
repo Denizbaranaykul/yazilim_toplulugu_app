@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yazilim_toplulugu_app/main.dart';
-import 'package:yazilim_toplulugu_app/pages/login_page/login_page.dart';
+import 'package:yazilim_toplulugu_app/pages/register_login_page/register_and_login_page.dart';
 
 class AuthGate extends StatelessWidget {
   @override
@@ -16,7 +16,7 @@ class AuthGate extends StatelessWidget {
         if (snapshot.hasData) {
           return Main_page();
         } else {
-          return Login_page();
+          return register_and_login_page();
         }
       },
     );
