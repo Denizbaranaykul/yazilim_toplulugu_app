@@ -1,21 +1,8 @@
 import 'package:flutter/material.dart';
 
-TextField password_box(TextEditingController passwordController) {
+TextField Text_box(TextEditingController TextController, String label) {
   return TextField(
-    controller: passwordController,
-    decoration: InputDecoration(
-      labelText: 'şifre',
-      border: OutlineInputBorder(),
-    ),
-  );
-}
-
-TextField emailbox(TextEditingController emailController) {
-  return TextField(
-    controller: emailController,
-    decoration: InputDecoration(
-      labelText: 'e-mail',
-      border: OutlineInputBorder(),
-    ),
+    controller: TextController,
+    decoration: InputDecoration(labelText: label, border: OutlineInputBorder()),
   );
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:yazilim_toplulugu_app/models/user_model.dart';
 import 'package:yazilim_toplulugu_app/pages/register_login_page/register_and_login_page_TextFiled.dart';
 import 'package:yazilim_toplulugu_app/service/auth.dart';
+import 'package:yazilim_toplulugu_app/service/user_service.dart';
 import 'package:yazilim_toplulugu_app/variable/globals.dart' as globals;
 
 class register_and_login_page extends StatefulWidget {
@@ -16,7 +18,9 @@ class _register_and_login_pageState extends State<register_and_login_page> {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController surnameController = TextEditingController();
+  UserService userService = UserService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,15 +29,29 @@ class _register_and_login_pageState extends State<register_and_login_page> {
         title: Center(child: Text(globals.isLogin ? 'Giriş Yap' : 'Kayıt Ol')),
       ),
       body: Column(
-        children: [
-          const SizedBox(height: 16),
-          emailbox(emailController),
-          const SizedBox(height: 16),
-          password_box(passwordController),
-          const SizedBox(height: 16),
-          action_button(context),
-          switch_mode_button(),
-        ],
+        children: globals.isLogin
+            ? [
+                const SizedBox(height: 16),
+                Text_box(emailController, "e-mail"),
+                const SizedBox(height: 16),
+                Text_box(passwordController, "şifre"),
+                const SizedBox(height: 16),
+                action_button(context),
+                switch_mode_button(),
+              ]
+            : [
+                const SizedBox(height: 16),
+                Text_box(nameController, "isim"),
+                const SizedBox(height: 16),
+                Text_box(surnameController, "soy isim"),
+                const SizedBox(height: 16),
+                Text_box(emailController, "e-mail"),
+                const SizedBox(height: 16),
+                Text_box(passwordController, "şifre"),
+                const SizedBox(height: 16),
+                action_button(context),
+                switch_mode_button(),
+              ],
       ),
     );
   }
@@ -49,10 +67,18 @@ class _register_and_login_pageState extends State<register_and_login_page> {
               password: passwordController.text,
             );
           } else {
-            await Auth().create_user(
+            final userCred = await Auth().create_user(
               email: emailController.text,
               password: passwordController.text,
             );
+            UserModel newUser = UserModel(
+              uid: userCred.user!.uid,
+              name: nameController.text,
+              surname: surnameController.text,
+              email: emailController.text,
+            );
+
+            userService.createUserDataBase(newUser);
           }
         } catch (e) {
           setState(() {
@@ -82,7 +108,7 @@ class _register_and_login_pageState extends State<register_and_login_page> {
     return ElevatedButton(
       onPressed: () {
         setState(() {
-          globals.isLogin = !globals.isLogin; // login <-> kayıt geçişi
+          globals.isLogin = !globals.isLogin;
         });
       },
       child: Text(mod),

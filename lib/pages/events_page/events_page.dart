@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yazilim_toplulugu_app/pages/events_page/events_card.dart';
 
@@ -9,6 +10,8 @@ class events_ extends StatefulWidget {
 }
 
 class _events_State extends State<events_> {
+  final TextEditingController suggestion_controller = TextEditingController();
+
   int selectedIndex = 0;
   int?
   votedIndex; // Hangi karta oy verildiğini tutar (null = henüz oy verilmedi)
@@ -20,12 +23,17 @@ class _events_State extends State<events_> {
   Widget card_event_vote(String text, int index) {
     final bool isVoted = votedIndex != null;
     final bool isThisVoted = votedIndex == index;
+    final String eventId = "event_$index"; // benzersiz ID
 
     return CardEventVote(
       text: text,
+      eventId: eventId,
       isThisVoted: isThisVoted,
       isVoted: isVoted,
-      onPressed: () {
+      onPressed: () async {
+        final userId = FirebaseAuth.instance.currentUser!.uid;
+        await voteEvent(eventId, userId, text); // ✅ Firestore’a kaydet
+
         setState(() {
           if (isThisVoted) {
             votedIndex = null;
@@ -81,7 +89,28 @@ class _events_State extends State<events_> {
                 "Etkinlik: Flutter 101 Eğitimi\n2 Mayıs - Saat 20:00",
                 1,
               ),
+              suggestion_field(suggestion_controller),
+              ElevatedButton(
+                onPressed: () {},
+                child: Text("etkinlik önerinizi gönderiniz"),
+              ),
             ],
+    );
+  }
+
+  TextField suggestion_field(TextEditingController Suggestion_Controller) {
+    return TextField(
+      controller: Suggestion_Controller,
+      maxLines: null, // çok satırlı
+      style: const TextStyle(fontSize: 18),
+      decoration: InputDecoration(
+        labelText: "Etkinlik Önerinizi Yazınız",
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 24,
+          horizontal: 16,
+        ),
+      ),
     );
   }
 

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yazilim_toplulugu_app/pages/main_page/main_page_body.dart';
 
@@ -30,13 +32,14 @@ Card card_event(String text) {
 
 class CardEventVote extends StatelessWidget {
   final String text;
+  final String eventId;
   final bool isThisVoted;
   final bool isVoted;
-  final VoidCallback onPressed;
-
+  final VoidCallback onPressed; // ← Bunu ekle!
   const CardEventVote({
     super.key,
     required this.text,
+    required this.eventId,
     required this.isThisVoted,
     required this.isVoted,
     required this.onPressed,
@@ -64,7 +67,10 @@ class CardEventVote extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: onPressed,
+              onPressed: () async {
+                final userId = FirebaseAuth.instance.currentUser!.uid;
+                await voteEvent(eventId, userId, text);
+              },
               child: Text(
                 isThisVoted
                     ? "Oyu Geri Çek"
@@ -83,5 +89,38 @@ class CardEventVote extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+Future<void> voteEvent(String eventId, String userId, String eventText) async {
+  final docRef = FirebaseFirestore.instance
+      .collection('event_votes')
+      .doc(eventId);
+
+  final doc = await docRef.get();
+
+  if (doc.exists) {
+    final data = doc.data()!;
+    final List voters = data['voters'] ?? [];
+
+    if (voters.contains(userId)) {
+      // Oy Geri Çekme
+      voters.remove(userId);
+      await docRef.update({
+        'votes': FieldValue.increment(-1),
+        'voters': voters,
+      });
+    } else {
+      // Oy Verme
+      voters.add(userId);
+      await docRef.update({'votes': FieldValue.increment(1), 'voters': voters});
+    }
+  } else {
+    // İlk defa oy veriliyorsa yeni belge oluştur
+    await docRef.set({
+      'text': eventText,
+      'votes': 1,
+      'voters': [userId],
+    });
   }
 }
