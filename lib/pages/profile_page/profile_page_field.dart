@@ -8,23 +8,16 @@ CircleAvatar profile_icon() {
   );
 }
 
-TextField email_field() {
+TextField profile_field(
+  String label,
+  TextEditingController control, {
+  bool obscureText = false,
+  bool read = false,
+}) {
   return TextField(
-    readOnly: true,
-    decoration: InputDecoration(
-      labelText: "İsim",
-      border: OutlineInputBorder(),
-    ),
-  );
-}
-
-TextField password_field() {
-  return TextField(
-    readOnly: true,
-    obscureText: true,
-    decoration: InputDecoration(
-      labelText: "Şifre",
-      border: OutlineInputBorder(),
-    ),
+    readOnly: read,
+    controller: control,
+    obscureText: obscureText,
+    decoration: InputDecoration(labelText: label, border: OutlineInputBorder()),
   );
 }

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:yazilim_toplulugu_app/pages/events_page/events_card.dart';
 
 class events_ extends StatefulWidget {
@@ -15,15 +16,46 @@ class _events_State extends State<events_> {
   int selectedIndex = 0;
   int?
   votedIndex; // Hangi karta oy verildiğini tutar (null = henüz oy verilmedi)
+
   List<String> etkinlikler = [
     "Flutter Eğitimi",
     "Yapay Zeka Paneli",
     "Hackathon Etkinliği",
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserVote();
+  }
+
+  Future<void> _loadUserVote() async {
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    final snapshot = await FirebaseFirestore.instance
+        .collection('event_votes')
+        .get();
+
+    for (var doc in snapshot.docs) {
+      final data = doc.data();
+      final List voters = data['voters'] ?? [];
+      if (voters.contains(userId)) {
+        final eventId = doc.id; // örn: "event_1"
+        final indexStr = eventId.split('_').last;
+        final index = int.tryParse(indexStr);
+        if (index != null) {
+          setState(() {
+            votedIndex = index;
+          });
+          break; // İlk bulunan oy olduğu için döngüyü bitir
+        }
+      }
+    }
+  }
+
   Widget card_event_vote(String text, int index) {
     final bool isVoted = votedIndex != null;
     final bool isThisVoted = votedIndex == index;
-    final String eventId = "event_$index"; // benzersiz ID
+    final String eventId = "event_$index";
 
     return CardEventVote(
       text: text,
@@ -32,7 +64,7 @@ class _events_State extends State<events_> {
       isVoted: isVoted,
       onPressed: () async {
         final userId = FirebaseAuth.instance.currentUser!.uid;
-        await voteEvent(eventId, userId, text); // ✅ Firestore’a kaydet
+        await voteEvent(eventId, userId, text);
 
         setState(() {
           if (isThisVoted) {
@@ -53,8 +85,6 @@ class _events_State extends State<events_> {
     );
   }
 
-  // card_event_vote fonksiyonunu State içinde tanımlıyoruz çünkü votedIndex'e erişmesi gerekiyor:
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,18 +97,27 @@ class _events_State extends State<events_> {
     return Column(
       children: selectedIndex == 0
           ? [
-              card_event("Etkinlik: Yapay Zeka Sunumu\n21 Temmuz - Saat 21:00"),
-              card_event("Etkinlik: Machine Learning\n23 Ağustos - Saat 22:00"),
-              card_event("Etkinlik: Machine Learning\n23 Ağustos - Saat 22:00"),
-              card_event("Etkinlik: Machine Learning\n23 Ağustos - Saat 22:00"),
-              card_event("Etkinlik: Machine Learning\n23 Ağustos - Saat 22:00"),
-              card_event("Etkinlik: Machine Learning\n23 Ağustos - Saat 22:00"),
-              card_event("Etkinlik: Machine Learning\n23 Ağustos - Saat 22:00"),
-              card_event("Etkinlik: Machine Learning\n23 Ağustos - Saat 22:00"),
-              card_event("Etkinlik: Machine Learning\n23 Ağustos - Saat 22:00"),
-              card_event("Etkinlik: Machine Learning\n23 Ağustos - Saat 22:00"),
-              card_event("Etkinlik: Machine Learning\n23 Ağustos - Saat 22:00"),
-              card_event("Etkinlik: Machine Learning\n23 Ağustos - Saat 22:00"),
+              event_card("event_1", "Yapay zeka kursu\n4 ağustos - saat 11:00"),
+              event_card(
+                "event_2",
+                "Mikro Çip konferansı\n4 ağustos - saat 11:00",
+              ),
+              event_card(
+                "event_3",
+                "tanışma kahvaltısı\n4 ağustos - saat 11:00",
+              ),
+              event_card(
+                "event_4",
+                "Kim milyoner olmak ister\n4 ağustos - saat 11:00",
+              ),
+              event_card(
+                "event_5",
+                "Etkinlik denemesi\n4 ağustos - saat 11:00",
+              ),
+              event_card(
+                "event_6",
+                "Etkinlik denemesi\n4 ağustos - saat 11:00",
+              ),
             ]
           : [
               card_event_vote(
@@ -90,17 +129,52 @@ class _events_State extends State<events_> {
                 1,
               ),
               suggestion_field(suggestion_controller),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text("etkinlik önerinizi gönderiniz"),
-              ),
+              suggestion_button(),
             ],
     );
   }
 
-  TextField suggestion_field(TextEditingController Suggestion_Controller) {
+  ParticipationCard event_card(String event_id, String txt) {
+    return ParticipationCard(eventId: event_id, text: txt);
+  }
+
+  ElevatedButton suggestion_button() {
+    return ElevatedButton(
+      onPressed: () async {
+        final suggestionText = suggestion_controller.text.trim();
+
+        if (suggestionText.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Lütfen önerinizi yazınız!")),
+          );
+          return;
+        }
+
+        try {
+          await FirebaseFirestore.instance.collection('event_suggestions').add({
+            'suggestion': suggestionText,
+            'timestamp': FieldValue.serverTimestamp(),
+            'userId': FirebaseAuth.instance.currentUser?.uid ?? 'anonymous',
+          });
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Öneriniz başarıyla gönderildi!")),
+          );
+
+          suggestion_controller.clear();
+        } catch (e) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text("Hata: $e")));
+        }
+      },
+      child: const Text("etkinlik önerinizi gönderiniz"),
+    );
+  }
+
+  TextField suggestion_field(TextEditingController suggestionController) {
     return TextField(
-      controller: Suggestion_Controller,
+      controller: suggestionController,
       maxLines: null, // çok satırlı
       style: const TextStyle(fontSize: 18),
       decoration: InputDecoration(
@@ -116,9 +190,9 @@ class _events_State extends State<events_> {
 
   AppBar appbar_events() {
     return AppBar(
-      backgroundColor: Color.fromARGB(225, 245, 98, 0),
+      backgroundColor: const Color.fromARGB(225, 245, 98, 0),
       bottom: PreferredSize(
-        preferredSize: Size.fromHeight(2),
+        preferredSize: const Size.fromHeight(2),
         child: Row(
           children: [
             Expanded(
