@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yazilim_toplulugu_app/pages/profile_page/appbar_profile_page.dart';
-import 'package:yazilim_toplulugu_app/pages/profile_page/profile_page_buttons.dart';
 import 'package:yazilim_toplulugu_app/pages/profile_page/profile_page_field.dart';
 
 class ProfilePage extends StatefulWidget {

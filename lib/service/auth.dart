@@ -32,4 +32,13 @@ class Auth {
   }) async {
     await _firebaseAuth.signOut();
   }
+
+  Future<void> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      print("Şifre sıfırlama maili gönderildi: $email");
+    } catch (e) {
+      print("Hata: $e");
+    }
+  }
 }
