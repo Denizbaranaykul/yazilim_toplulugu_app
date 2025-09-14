@@ -29,36 +29,60 @@ class _register_and_login_pageState extends State<register_and_login_page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: globals.isLogin ? Colors.blue : Colors.orange,
+        backgroundColor: globals.isLogin
+            ? const Color.fromARGB(255, 35, 129, 229)
+            : const Color.fromARGB(255, 83, 103, 148),
         title: Center(child: Text(globals.isLogin ? 'Giriş Yap' : 'Kayıt Ol')),
       ),
-      body: Column(
-        children: globals.isLogin
-            ? [
-                const SizedBox(height: 16),
-                Text_box(emailController, "e-mail"),
-                const SizedBox(height: 16),
-                Text_box(passwordController, "şifre"),
-                const SizedBox(height: 16),
-                action_button(context),
-                forgot_password_button(context),
-                switch_mode_button(),
-              ]
-            : [
-                const SizedBox(height: 16),
-                Text_box(nameController, "isim"),
-                const SizedBox(height: 16),
-                Text_box(surnameController, "soy isim"),
-                const SizedBox(height: 16),
-                Text_box(emailController, "e-mail"),
-                const SizedBox(height: 16),
-                Text_box(passwordController, "şifre"),
-                const SizedBox(height: 16),
-                univercity_button(url),
-                action_button(context),
-                switch_mode_button(),
-              ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom + 20, // alt boşluk
+            left: 16,
+            right: 16,
+            top: 16,
+          ),
+          child: IntrinsicHeight(
+            // Column yüksekliklerini düzgün hesaplar
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: globals.isLogin
+                  ? [
+                      logo(300, 370),
+                      const SizedBox(height: 16),
+                      Text_box(emailController, "e-mail"),
+                      const SizedBox(height: 16),
+                      Text_box(passwordController, "şifre"),
+                      const SizedBox(height: 16),
+                      action_button(context),
+                      forgot_password_button(context),
+                      switch_mode_button(),
+                    ]
+                  : [
+                      logo(250, 270),
+                      const SizedBox(height: 16),
+                      Text_box(nameController, "isim"),
+                      const SizedBox(height: 16),
+                      Text_box(surnameController, "soy isim"),
+                      const SizedBox(height: 16),
+                      Text_box(emailController, "e-mail"),
+                      const SizedBox(height: 16),
+                      Text_box(passwordController, "şifre"),
+                      const SizedBox(height: 16),
+                      action_button(context),
+                      univercity_button(url),
+                      switch_mode_button(),
+                    ],
+            ),
+          ),
+        ),
       ),
+    );
+  }
+
+  Center logo(double x, double y) {
+    return Center(
+      child: Image.asset('assets/icon/app_icon.jpeg', width: x, height: y),
     );
   }
 

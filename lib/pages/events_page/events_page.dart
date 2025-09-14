@@ -190,7 +190,7 @@ class _events_State extends State<events_> {
 
   AppBar appbar_events() {
     return AppBar(
-      backgroundColor: const Color.fromARGB(225, 245, 98, 0),
+      backgroundColor: const Color.fromARGB(223, 43, 50, 239),
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(2),
         child: Row(

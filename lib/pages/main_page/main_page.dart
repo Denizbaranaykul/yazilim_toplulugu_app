@@ -14,7 +14,7 @@ class Main_Page extends StatelessWidget {
           child: Image.asset(
             'assets/icon/app_icon.jpeg',
             width: 300,
-            height: 450,
+            height: 370,
           ),
         ),
 

@@ -91,7 +91,7 @@ class _ParticipationCardState extends State<ParticipationCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: const Color.fromARGB(244, 181, 7, 71),
+      color: const Color.fromARGB(244, 41, 156, 228),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       elevation: 4,
       child: Padding(
