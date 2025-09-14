@@ -28,19 +28,6 @@ Card card_event_main() {
   );
 }
 
-SizedBox triangle_box_main() {
-  return SizedBox(
-    width: 300,
-    height: 220,
-    child: Stack(
-      alignment: Alignment.center,
-      children: [
-        CustomPaint(size: const Size(300, 220), painter: TrianglePainter()),
-      ],
-    ),
-  );
-}
-
 Expanded container_void_main() => Expanded(child: Container());
 
 Row main_page_katilim_button() {
