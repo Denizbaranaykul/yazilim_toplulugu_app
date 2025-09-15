@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:yazilim_toplulugu_app/pages/forum_page/forum_page.dart';
 import 'package:yazilim_toplulugu_app/pages/main_page/bottom_navigationbar.dart';
 import 'package:yazilim_toplulugu_app/pages/main_page/main_page_body.dart';
 import 'package:yazilim_toplulugu_app/pages/events_page/events_page.dart';
@@ -63,6 +64,7 @@ class _Main_pageState extends State<Main_page> {
     Main_Page(),
     video_page(),
     events_(),
+    ForumPage(),
     ProfilePage(),
   ];
   @override
@@ -78,11 +80,13 @@ class _Main_pageState extends State<Main_page> {
       body: _pages[currentIndex],
       //alt barda ki iconlar ile sayfa geçişini sağlıyoruz
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Color.fromARGB(249, 17, 0, 10),
+        type: BottomNavigationBarType.shifting,
         items: [
           main_page_button_bottom(),
           video_page_button_bottom(),
           events_page_button_bottom(),
+          forum_page_button_bottom(),
           profile_page_button_bottom(),
         ],
         currentIndex: currentIndex,

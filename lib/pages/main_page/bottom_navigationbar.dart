@@ -25,3 +25,8 @@ BottomNavigationBarItem main_page_button_bottom() => BottomNavigationBarItem(
   icon: Icon(Icons.home, color: Color.fromARGB(120, 28, 1, 1)),
   label: 'Anasayfa',
 );
+
+BottomNavigationBarItem forum_page_button_bottom() => BottomNavigationBarItem(
+  icon: Icon(Icons.forum, color: Color.fromARGB(247, 7, 115, 132)),
+  label: 'Forum',
+);
