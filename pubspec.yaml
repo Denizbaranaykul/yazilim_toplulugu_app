@@ -72,6 +72,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - assets/icon/app_icon.jpeg
+     - assets/icon/gemini-color.png
     # - assets/env.json
 flutter_icons:
   android: true
@@ -90,11 +91,56 @@ flutter_icons:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+  fonts:
+    - family: My_font
+      fonts:
+        - asset: assets/fonts/Monstserrat-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Monstserrat-BlackItalic.ttf
+          style: italic
+          weight: 900
+        - asset: assets/fonts/Monstserrat-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Monstserrat-BoldItalic.ttf
+          style: italic
+          weight: 700
+        - asset: assets/fonts/Monstserrat-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Monstserrat-ExtraBoldItalic.ttf
+          style: italic
+          weight: 800
+        - asset: assets/fonts/Monstserrat-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Monstserrat-ExtraLightItalic.ttf
+          style: italic
+          weight: 200
+        - asset: assets/fonts/Monstserrat-Italic.ttf
+          style: italic
+          weight: 400
+        - asset: assets/fonts/Monstserrat-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Monstserrat-LightItalic.ttf
+          style: italic
+          weight: 300
+        - asset: assets/fonts/Monstserrat-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Monstserrat-MediumItalic.ttf
+          style: italic
+          weight: 500
+        - asset: assets/fonts/Monstserrat-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Monstserrat-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Monstserrat-SemiBoldItalic.ttf
+          style: italic
+          weight: 600
+        - asset: assets/fonts/Monstserrat-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Monstserrat-ThinItalic.ttf
+          style: italic
+          weight: 100
+
+       
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

@@ -141,18 +141,30 @@ class _register_and_login_pageState extends State<register_and_login_page> {
               password: passwordController.text,
             );
           } else {
-            final userCred = await Auth().create_user(
-              email: emailController.text,
-              password: passwordController.text,
-            );
-            UserModel newUser = UserModel(
-              uid: userCred.user!.uid,
-              name: nameController.text,
-              surname: surnameController.text,
-              email: emailController.text,
-            );
+            if (emailController.text.contains("@pau.edu.tr")) {
+              final userCred = await Auth().create_user(
+                email: emailController.text,
+                password: passwordController.text,
+              );
+              UserModel newUser = UserModel(
+                uid: userCred.user!.uid,
+                name: nameController.text,
+                surname: surnameController.text,
+                email: emailController.text,
+              );
 
-            userService.createUserDataBase(newUser);
+              userService.createUserDataBase(newUser);
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    "Lütfen Okul e-mailinizi kullanınız 'ornek@pau.edu.tr' ",
+                  ),
+                  duration: Duration(seconds: 2),
+                  backgroundColor: Colors.red,
+                ),
+              );
+            }
           }
         } catch (e) {
           setState(() {

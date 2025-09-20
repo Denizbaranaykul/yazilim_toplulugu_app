@@ -40,29 +40,14 @@ Row main_page_katilim_button() {
   );
 }
 
-class TrianglePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color.fromARGB(234, 231, 229, 229)
-      ..style = PaintingStyle.fill;
-
-    final path = Path()
-      ..moveTo(size.width / 2, 0) // üst tepe
-      ..lineTo(0, size.height) // sol alt
-      ..lineTo(size.width, size.height) // sağ alt
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
-
 AppBar app_bar_main() {
   return AppBar(
-    title: Center(child: Text('yazılım topluluğu')),
+    title: Center(
+      child: Text(
+        'Ana Sayfa',
+        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 30),
+      ),
+    ),
     backgroundColor: Color.fromARGB(255, 0, 176, 245),
   );
 }

@@ -27,6 +27,6 @@ BottomNavigationBarItem main_page_button_bottom() => BottomNavigationBarItem(
 );
 
 BottomNavigationBarItem forum_page_button_bottom() => BottomNavigationBarItem(
-  icon: Icon(Icons.forum, color: Color.fromARGB(247, 7, 115, 132)),
-  label: 'Forum',
+  icon: Icon(Icons.smart_toy, color: Color.fromARGB(247, 7, 115, 132)),
+  label: 'Yapay Zeka',
 );

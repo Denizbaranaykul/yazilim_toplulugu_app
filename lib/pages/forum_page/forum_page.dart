@@ -66,8 +66,17 @@ class _ForumPageState extends State<ForumPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Forum')),
-        backgroundColor: const Color.fromARGB(255, 7, 80, 13),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(width: 110),
+            Image.asset('assets/icon/gemini-color.png', width: 40, height: 40),
+            const SizedBox(width: 8),
+            Text('Chat Bot', style: TextStyle(fontWeight: FontWeight.w400)),
+          ],
+        ),
+        backgroundColor: const Color.fromARGB(255, 145, 147, 146),
       ),
       body: Column(
         children: [
@@ -108,7 +117,7 @@ class _ForumPageState extends State<ForumPage> {
                 const SizedBox(width: 8),
                 CircleAvatar(
                   radius: 25,
-                  backgroundColor: Colors.blue,
+                  backgroundColor: const Color.fromARGB(255, 133, 146, 156),
                   child: IconButton(
                     icon: const Icon(Icons.send, color: Colors.white),
                     onPressed: _sendMessage,

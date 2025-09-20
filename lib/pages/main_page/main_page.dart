@@ -6,20 +6,42 @@ class Main_Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Column(
       children: [
-        // container_void_main(), // üst boşluk bırakıyor
-        // Üçgen ve butonlar
-        Center(
-          child: Image.asset(
-            'assets/icon/app_icon.jpeg',
-            width: 300,
-            height: 370,
+        Padding(padding: EdgeInsets.only(top: screenHeight * 0.05)),
+        Expanded(
+          flex: 4, // ekranın 4/10'unu kaplar
+          child: Center(
+            child: Image.asset(
+              'assets/icon/app_icon.jpeg',
+              width: 300,
+              height: 370,
+            ),
           ),
         ),
-
-        event_card("event_1", "Mikro Çip konferansı\n4 ağustos - saat 11:00"),
-        event_card("event_2", "Mikro Çip konferansı\n4 ağustos - saat 11:00"),
+        Expanded(
+          flex: 6,
+          child: ListView(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: screenHeight * 0.06),
+                child: event_card(
+                  "event_1",
+                  "Mikro Çip konferansı\n4 ağustos - saat 11:00",
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: screenHeight * 0.02),
+                child: event_card(
+                  "event_2",
+                  "Mikro Çip konferansı\n4 ağustos - saat 11:00",
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
