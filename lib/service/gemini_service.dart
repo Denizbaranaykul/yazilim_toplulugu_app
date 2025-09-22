@@ -8,10 +8,10 @@ class GeminiService {
 
   // Topluluk bilgisi
   final String communityInfo = '''
-- Topluluğun adı: Yazılım Topluluğu
+- Topluluğun adı: Yazılım Geliştirme Topluluğu
 - Toplantılar: Her çarşamba 18:00, A-101 sınıfı
-- Lider: Atakan Çelik
-- Başkan Yardımcısı: Atakan Çelik
+- Başkan: Atakan Çelik
+- Başkan Yardımcısı: Deniz Baran Aykul
 - Katılım: Ücretsiz
 ''';
 
