@@ -10,6 +10,7 @@ import 'package:yazilim_toplulugu_app/pages/videos_page/videos_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:yazilim_toplulugu_app/service/Auth_gate.dart';
 import 'package:yazilim_toplulugu_app/service/notification_question.dart';
+import 'package:yazilim_toplulugu_app/variable/globals.dart';
 import 'service/firebase_options.dart';
 
 void main() async {
@@ -40,6 +41,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
+    Future.delayed(Duration(milliseconds: 200), () {
+      setState(() {
+        opacity_main_logo = 1.0;
+      });
+    });
   }
 
   @override

@@ -154,6 +154,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return ElevatedButton(
       onPressed: updateUserInfo,
       child: const Text("Bilgileri Güncelle"),
+      style: ElevatedButton.styleFrom(foregroundColor: Colors.black,),
     );
   }
 
@@ -161,6 +162,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color.fromARGB(226, 243, 182, 0),
+        foregroundColor: Colors.black,
       ),
       onPressed: changePassword,
       child: const Text("Şifreyi Değiştir"),
@@ -172,6 +174,7 @@ ElevatedButton sign_out_button(BuildContext context) {
   return ElevatedButton(
     style: ElevatedButton.styleFrom(
       backgroundColor: Color.fromARGB(245, 255, 0, 0),
+      foregroundColor: Colors.black,
     ),
     onPressed: () async {
       await FirebaseAuth.instance.signOut();
