@@ -7,13 +7,13 @@ plugins {
 
 android {
     namespace = "com.deniz_baran_aykul.yazilim_toplulugu_app"
-    compileSdk = 35
+    compileSdk = 36
     ndkVersion = "27.0.12077973"
 
     defaultConfig {
         applicationId = "com.deniz_baran_aykul.yazilim_toplulugu_app"
         minSdk = flutter.minSdkVersion
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
     }
