@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:yazilim_toplulugu_app/pages/forum_page/forum_page.dart';
+import 'package:yazilim_toplulugu_app/pages/game_page/game_page.dart';
 import 'package:yazilim_toplulugu_app/pages/main_page/bottom_navigationbar.dart';
 import 'package:yazilim_toplulugu_app/pages/main_page/main_page_body.dart';
 import 'package:yazilim_toplulugu_app/pages/events_page/events_page.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late String username;
   void initState() {
     super.initState();
     Future.delayed(Duration(milliseconds: 200), () {
@@ -72,6 +74,7 @@ class _Main_pageState extends State<Main_page> {
     video_page(),
     events_(),
     ForumPage(),
+    GamePage(),
     ProfilePage(),
   ];
   @override
@@ -94,6 +97,7 @@ class _Main_pageState extends State<Main_page> {
           video_page_button_bottom(),
           events_page_button_bottom(),
           forum_page_button_bottom(),
+          game_page_button_bottom(),
           profile_page_button_bottom(),
         ],
         currentIndex: currentIndex,

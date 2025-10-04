@@ -90,70 +90,86 @@ class _ParticipationCardState extends State<ParticipationCard> {
 
   @override
   Widget build(BuildContext context) {
-    Color card_color=Color.fromARGB(244, 41, 156, 228);// kartın arka plan rengi
-    Color button_color_attending=Colors.white;// katılacağım butonunun arkaplan rengi
-    Color button_color_not_attending=Colors.white;// katılmayacağım butonunun arkaplan rengi
-    if(userChoice=="attending")//kullanıcı eçimi katılacağımas
+    Color card_color = Color.fromARGB(
+      244,
+      41,
+      156,
+      228,
+    ); // kartın arka plan rengi
+    Color button_color_attending =
+        Colors.white; // katılacağım butonunun arkaplan rengi
+    Color button_color_not_attending =
+        Colors.white; // katılmayacağım butonunun arkaplan rengi
+    if (userChoice == "attending") //kullanıcı eçimi katılacağımas
     {
-        card_color=Colors.green;
-        button_color_attending=Colors.white;
-        button_color_not_attending=Colors.grey;
-    }
-    else if(userChoice == "not_attending")//katılmayacağımsa
+      card_color = Colors.green;
+      button_color_attending = Colors.white;
+      button_color_not_attending = Colors.grey;
+    } else if (userChoice == "not_attending") //katılmayacağımsa
     {
-        card_color=Colors.redAccent;
-       button_color_not_attending= Colors.white;
-       button_color_attending=Colors.grey;
+      card_color = Colors.redAccent;
+      button_color_not_attending = Colors.white;
+      button_color_attending = Colors.grey;
     }
-    return AnimatedContainer(//animasyonlu konteynira aldım kartı ki rengi değişsin
-  duration: const Duration(milliseconds: 300),//gerçekleşme süresi
-  curve: Curves.easeInOut,//geçişin tipi
-  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),//ssasğdan soldan verdiği boşluk kartın ta kendisi
-  decoration: BoxDecoration(
-    color:card_color,//rengi değişkenden alıyorum ki geçiş başlasın
-    borderRadius: BorderRadius.circular(12),//burda kenarların yuvarlak olmasını sağlıyorum
-  ),
-  child: Padding(
-    padding: const EdgeInsets.all(16.0),//kartın içinde ki öğelerle arasında ki boşluk
-    child: Column(
-      mainAxisSize: MainAxisSize.min,// sütunda ne kadarlık alan kaplıycaqğını belirtiyor burda en az verdim
-      crossAxisAlignment: CrossAxisAlignment.center,//çapraz ekende itemlerin sıralanmaya başlayacağı yeri belirtiyor
-      children: [
-        Text(
-          widget.text,
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-        ),
-        const SizedBox(height: 12),
-        Row(
+    return AnimatedContainer(
+      //animasyonlu konteynira aldım kartı ki rengi değişsin
+      duration: const Duration(milliseconds: 300), //gerçekleşme süresi
+      curve: Curves.easeInOut, //geçişin tipi
+      margin: const EdgeInsets.symmetric(
+        vertical: 8,
+        horizontal: 16,
+      ), //ssasğdan soldan verdiği boşluk kartın ta kendisi
+      decoration: BoxDecoration(
+        color: card_color, //rengi değişkenden alıyorum ki geçiş başlasın
+        borderRadius: BorderRadius.circular(
+          12,
+        ), //burda kenarların yuvarlak olmasını sağlıyorum
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(
+          10.0,
+        ), //kartın içinde ki öğelerle arasında ki boşluk
+        child: Column(
+          mainAxisSize: MainAxisSize
+              .min, // sütunda ne kadarlık alan kaplıycaqğını belirtiyor burda en az verdim
+          crossAxisAlignment: CrossAxisAlignment
+              .center, //çapraz ekende itemlerin sıralanmaya başlayacağı yeri belirtiyor
           children: [
-            ElevatedButton(
-              onPressed: () => submitVote("attending"),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: button_color_attending,
-                foregroundColor: Colors.black,
+            Text(
+              widget.text,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
               ),
-              child: Text("Katılacağım ($attending)"),
             ),
-            const SizedBox(width: 16),
-            ElevatedButton(
-              onPressed: () => submitVote("not_attending"),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: button_color_not_attending,
-                foregroundColor: Colors.black,
-              ),
-              child: Text("Katılmayacağım ($notAttending)"),
-          ),
-         ],
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () => submitVote("attending"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: button_color_attending,
+                    foregroundColor: Colors.black,
+                  ),
+                  child: Text("Katılacağım ($attending)"),
+                ),
+                const SizedBox(width: 6),
+                ElevatedButton(
+                  onPressed: () => submitVote("not_attending"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: button_color_not_attending,
+                    foregroundColor: Colors.black,
+                  ),
+                  child: Text("Katılmayacağım ($notAttending)"),
+                ),
+              ],
+            ),
+          ],
         ),
-       ],
-     ),
-    ),
-  );
- }
+      ),
+    );
+  }
 }
 
 class CardEventVote extends StatelessWidget {

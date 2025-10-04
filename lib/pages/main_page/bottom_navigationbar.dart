@@ -30,3 +30,8 @@ BottomNavigationBarItem forum_page_button_bottom() => BottomNavigationBarItem(
   icon: Icon(Icons.smart_toy, color: Color.fromARGB(247, 7, 115, 132)),
   label: 'Yapay Zeka',
 );
+
+BottomNavigationBarItem game_page_button_bottom() => BottomNavigationBarItem(
+  icon: Icon(Icons.sports_esports, color: Color.fromARGB(247, 222, 101, 9)),
+  label: 'oyun',
+);
