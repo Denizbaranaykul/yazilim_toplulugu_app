@@ -81,27 +81,43 @@ class TetrisPainter extends CustomPainter {
   final List<List<Color?>> grid;
   final Tetromino? piece;
   final int row, col;
+  final double blockSize;
 
-  TetrisPainter(this.grid, this.piece, this.row, this.col);
+  TetrisPainter(this.grid, this.piece, this.row, this.col, this.blockSize);
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
+
+    // Zemin (tam siyah doldur)
+    paint.color = Colors.black;
+    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), paint);
+
+    // Griddeki sabit taşlar
     for (int r = 0; r < grid.length; r++) {
       for (int c = 0; c < grid[r].length; c++) {
         if (grid[r][c] != null) {
           paint.color = grid[r][c]!;
-          canvas.drawRect(Rect.fromLTWH(c * 20.0, r * 20.0, 20.0, 20.0), paint);
+          canvas.drawRect(
+            Rect.fromLTWH(c * blockSize, r * blockSize, blockSize, blockSize),
+            paint,
+          );
         }
       }
     }
+
+    // Düşmekte olan taş
     if (piece != null) {
       paint.color = piece!.color;
       for (var pos in piece!.shape) {
         int r = row + pos[0];
         int c = col + pos[1];
-        if (r >= 0)
-          canvas.drawRect(Rect.fromLTWH(c * 20.0, r * 20.0, 20.0, 20.0), paint);
+        if (r >= 0) {
+          canvas.drawRect(
+            Rect.fromLTWH(c * blockSize, r * blockSize, blockSize, blockSize),
+            paint,
+          );
+        }
       }
     }
   }

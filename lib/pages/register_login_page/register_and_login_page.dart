@@ -141,7 +141,7 @@ class _register_and_login_pageState extends State<register_and_login_page> {
               password: passwordController.text,
             );
           } else {
-            if (emailController.text.contains("@pau.edu.tr")) {
+            if (emailController.text.contains("@posta.pau.edu.tr")) {
               final userCred = await Auth().create_user(
                 email: emailController.text,
                 password: passwordController.text,

@@ -15,7 +15,7 @@ class GamePage extends StatefulWidget {
 class _GamePageState extends State<GamePage> {
   static const int rowCount = 20;
   static const int colCount = 10;
-  static const double blockSize = 20.0;
+  static const double blockSize = 25.0;
   String name = "";
   String surname = "";
   String email = "";
@@ -240,6 +240,7 @@ class _GamePageState extends State<GamePage> {
                       currentPiece,
                       currentRow,
                       currentCol,
+                      blockSize,
                     ),
                   ),
                 ),
@@ -251,19 +252,39 @@ class _GamePageState extends State<GamePage> {
                 children: [
                   IconButton(
                     onPressed: moveLeft,
-                    icon: Icon(Icons.arrow_left, color: Colors.white),
+                    icon: Icon(Icons.arrow_left, color: Colors.white, size: 48),
+                    iconSize: 48,
+                    splashRadius: 36,
                   ),
                   IconButton(
                     onPressed: moveDown,
-                    icon: Icon(Icons.arrow_downward, color: Colors.white),
+                    icon: Icon(
+                      Icons.arrow_downward,
+                      color: Colors.white,
+                      size: 48,
+                    ),
+                    iconSize: 48,
+                    splashRadius: 36,
                   ),
                   IconButton(
                     onPressed: moveRight,
-                    icon: Icon(Icons.arrow_right, color: Colors.white),
+                    icon: Icon(
+                      Icons.arrow_right,
+                      color: Colors.white,
+                      size: 48,
+                    ),
+                    iconSize: 48,
+                    splashRadius: 36,
                   ),
                   IconButton(
                     onPressed: rotatePiece,
-                    icon: Icon(Icons.rotate_right, color: Colors.white),
+                    icon: Icon(
+                      Icons.rotate_right,
+                      color: Colors.white,
+                      size: 48,
+                    ),
+                    iconSize: 48,
+                    splashRadius: 36,
                   ),
                 ],
               ),
