@@ -30,7 +30,7 @@ class GeminiService {
         throw Exception("API key Remote Config'ten alınamadı.");
       }
 
-      _model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: apiKey);
+      _model = GenerativeModel(model: 'gemini-2.5-flash', apiKey: apiKey);
       _initialized = true;
     } catch (e) {
       throw Exception("API key yüklenemedi: $e");

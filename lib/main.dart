@@ -52,10 +52,23 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(fontFamily: "My_font"),
-      debugShowCheckedModeBanner: false,
-      home: AuthGate(), // yönlendirmeyi burada yapacağız
+    return ValueListenableBuilder<bool>(
+      valueListenable: isDarkMode,
+      builder: (context, dark, _) {
+        return MaterialApp(
+          theme: ThemeData(
+            fontFamily: "My_font",
+            brightness: Brightness.light,
+          ),
+          darkTheme: ThemeData(
+            fontFamily: "My_font",
+            brightness: Brightness.dark,
+          ),
+          themeMode: dark ? ThemeMode.dark : ThemeMode.light,
+          debugShowCheckedModeBanner: false,
+          home: AuthGate(),
+        );
+      },
     );
   }
 }
@@ -90,7 +103,9 @@ class _Main_pageState extends State<Main_page> {
       body: _pages[currentIndex],
       //alt barda ki iconlar ile sayfa geçişini sağlıyoruz
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Color.fromARGB(249, 17, 0, 10),
+        selectedItemColor: isDarkMode.value 
+    ? const Color(0xFFE1D5E7) // Koyu modda açık bir renk (okunabilirlik için)
+    : const Color(0xFF11000A), // Açık modda senin o koyu mor rengin
         type: BottomNavigationBarType.shifting,
         items: [
           main_page_button_bottom(),

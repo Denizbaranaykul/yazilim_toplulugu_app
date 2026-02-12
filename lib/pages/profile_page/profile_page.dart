@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yazilim_toplulugu_app/pages/profile_page/appbar_profile_page.dart';
 import 'package:yazilim_toplulugu_app/pages/profile_page/profile_page_field.dart';
+import 'package:yazilim_toplulugu_app/variable/globals.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -142,6 +143,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
               const SizedBox(height: 20),
+              dark_theme_button(),
+              const SizedBox(height: 20),
               sign_out_button(context),
             ],
           ),
@@ -152,9 +155,12 @@ class _ProfilePageState extends State<ProfilePage> {
 
   ElevatedButton update_button() {
     return ElevatedButton(
+      style : ElevatedButton.styleFrom(
+        backgroundColor: Color.fromARGB(255, 9, 98, 214),
+        foregroundColor: Colors.black,
+      ),
       onPressed: updateUserInfo,
       child: const Text("Bilgileri Güncelle"),
-      style: ElevatedButton.styleFrom(foregroundColor: Colors.black,),
     );
   }
 
@@ -166,6 +172,24 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       onPressed: changePassword,
       child: const Text("Şifreyi Değiştir"),
+    );
+  }
+
+  Widget dark_theme_button() {
+    return ValueListenableBuilder<bool>(
+      valueListenable: isDarkMode,
+      builder: (context, dark, _) {
+        return SizedBox(
+          width: double.infinity,
+          child: OutlinedButton.icon(
+            onPressed: () {
+              isDarkMode.value = !isDarkMode.value;
+            },
+            icon: Icon(dark ? Icons.light_mode : Icons.dark_mode),
+            label: Text(dark ? "Açık Tema" : "Karanlık Tema"),
+          ),
+        );
+      },
     );
   }
 }

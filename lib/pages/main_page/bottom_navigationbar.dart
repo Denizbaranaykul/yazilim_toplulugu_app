@@ -4,6 +4,7 @@ BottomNavigationBarItem profile_page_button_bottom() {
   return BottomNavigationBarItem(
     icon: Icon(Icons.person, color: Color.fromARGB(244, 2, 188, 20)),
     label: 'Profil',
+    
   );
 }
 
